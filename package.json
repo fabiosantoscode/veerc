@@ -25,6 +25,8 @@
   },
   "dependencies": {
     "gulp-nodemon": "^1.0.2",
-    "restify": "^2.7.0"
+    "restify": "^2.7.0",
+    "irc": "^0.3.6",
+    "engine.io": "^1.0.5"
   }
 }
