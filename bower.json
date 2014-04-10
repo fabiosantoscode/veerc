@@ -1,0 +1,22 @@
+{
+  "name": "veerc",
+  "version": "0.0.0",
+  "homepage": "https://github.com/fabiosantoscode/veerc",
+  "authors": [
+    "Fábio Santos <fabiosantosart@gmail.com>",
+    "Rogério Vicente <rogeriopvl@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "apps/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Ink": "~3.0.0",
+    "jquery": "~2.1.0"
+  }
+}

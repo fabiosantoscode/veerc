@@ -1,0 +1,14 @@
+html, body {
+    height: 100%;
+    background: #f0f0f0;
+}
+.wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -120px;
+    overflow: auto;
+}
+.top-menu {
+    background: #1a1a1a;
+}
