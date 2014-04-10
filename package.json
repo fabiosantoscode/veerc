@@ -17,9 +17,14 @@
   },
   "homepage": "https://github.com/fabiosantoscode/veerc",
   "devDependencies": {
-    "gulp-ruby-sass": "^0.4.1",
-    "gulp-util": "^2.2.14",
     "gulp": "^3.6.0",
-    "gulp-connect": "^2.0.5"
+    "gulp-connect": "^2.0.5",
+    "gulp-ruby-sass": "^0.4.1",
+    "gulp-shell": "^0.2.4",
+    "gulp-util": "^2.2.14"
+  },
+  "dependencies": {
+    "gulp-nodemon": "^1.0.2",
+    "restify": "^2.7.0"
   }
 }
