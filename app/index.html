@@ -20,22 +20,29 @@
         <link rel="stylesheet" type="text/css" href="styles/main.css">
     </head>
 
-    <body>
+    <body ng-app="veercApp">
 
         <div class="wrap">
             <div class="top-menu">
                 <nav class="ink-navigation ink-grid">
                     <ul class="menu horizontal black">
-                        <li class="active"><a href="#">Home</a></li>
+                        <li class="active"><a href="#">Veerc</a></li>
                         <li><a href="#">Settings</a></li>
                         <li><a href="#">About</a></li>
                     </ul>
                 </nav>
             </div>
 
-            <div class="ink-grid vertical-space">
-                <h1>Veerc</h1>
+            <div class="ink-grid vertical-space" ng-view>
             </div>
         </div>
-    
-        <script src="/bundle.js"></script>
+
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/chat.js"></script>
+        <script src="scripts/services/irc.js"></script>
+    </body>
+</html>

@@ -33,7 +33,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
         'app/styles/*.scss',
         'app/styles/*.css',
         'app/scripts/*.js',
-        'app/*.html'
+        'app/**/*.html'
     ], function (event) {
         return gulp.src(event.path)
             .pipe(connect.reload())

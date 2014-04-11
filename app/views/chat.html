@@ -1,0 +1,20 @@
+<div class="connect-area" ng-show="!user.hasSetup">
+    <form class="ink-form">
+        <div class="control-group">
+            <label>Nickname</label>
+            <div class="control">
+                <input type="text" placeholder="insert nickname" ng-model="nick">
+            </div>
+            <label>Channels</label>
+            <div class="control">
+                <input type="text" placeholder="ex. #nodejs, #inksapo" ng-model="channels">
+            </div>
+            <label>&nbsp;</label>
+            <div class="control">
+                <button class="ink-button blue" type="submit" ng-click="connect()">Connect</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<div class="chat-area" ng-show="user.hasSetup"></div>

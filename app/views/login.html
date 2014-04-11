@@ -1,0 +1,18 @@
+<h2>Login</h2>
+<form class="ink-form">
+    <div class="control-group">
+        <label>Email</label>
+        <div class="control">
+            <input type="text" placeholder="me@example.com" ng-model="user.email">
+        </div>
+        <label>Password</label>
+        <div class="control">
+            <input type="password">
+        </div>
+        <label>&nbsp;</label>
+        <div class="control">
+            <button type="submit" class="ink-button blue" ng-click="login()">Login</button>
+            <span ng-show="statusMessage" class="red">{{ statusMessage }}</span>
+        </div>
+    </div>
+</form>
