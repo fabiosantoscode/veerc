@@ -56,7 +56,7 @@ sockServer.on('connection', function(sock) {
 })
 
 if (!module.parent) {  // Started from console
-    server.listen(9000)
+    server.listen(3000)
 } else {  // required
     module.exports.sockServer = sockServer
     module.exports.server = server
