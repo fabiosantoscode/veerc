@@ -14,5 +14,10 @@ html, body {
 }
 
 .chat-area {
-    background-color: #eee;
+    min-height: 20em;
+    max-height: 20em;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    padding: 1em;
+    overflow-y: auto;
 }
