@@ -22,7 +22,7 @@ var ircClient = new irc.Client(
 );
 
 ircClient.on('raw', function (message) {
-    backlog.push(JSON.stringify(message))
+    backlog.push(message)
 })
 
 ircClient.on('error', function (err) { console.error(err) })
