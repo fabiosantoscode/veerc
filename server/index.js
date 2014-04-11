@@ -33,7 +33,7 @@ var backlogStream = backlog.createReadStream()
 var sockServer = require('socket.io').listen(pureServer)
 
 sockServer.on('connection', function(sock) {
-    backlogStream.createReadStream().on('data', function () {
+    backlogStream.on('data', function () {
         sock.emit('message')
     })
     sock.on('message', function (msg) {
@@ -61,3 +61,4 @@ if (!module.parent) {  // Started from console
     module.exports.sockServer = sockServer
     module.exports.server = server
 }
+
