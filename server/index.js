@@ -1,11 +1,11 @@
 /**
  * Main server
  */
-var websocketAsStream = require('websocket-stream')
 var Backlog = require('tailable-capped-array')
 var restify = require('restify')
 var path = require('path')
 var irc = require('irc')
+var _ = require('underscore')
 
 var server = restify.createServer({})
 var pureServer = server.server
