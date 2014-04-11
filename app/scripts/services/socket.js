@@ -3,7 +3,7 @@
 angular.module('veercApp')
 .factory('socket', ['$rootScope', function ($rootScope) {
 
-    var socket = io.connect();
+    var socket = io.connect('http://localhost:3000');
 
     return {
         on: function (eventName, cb) {

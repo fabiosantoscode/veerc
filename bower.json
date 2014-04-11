@@ -19,6 +19,7 @@
     "Ink": "~3.0.0",
     "angular": "~1.2.16",
     "angular-route": "~1.2.16",
-    "socket.io-client": "~0.9.16"
+    "socket.io-client": "~0.9.16",
+    "momentjs": "~2.5.1"
   }
 }

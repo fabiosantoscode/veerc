@@ -30,3 +30,13 @@
     \_/    \_______/ \_______/|__/       \_______/
 </pre>
 </div>
+
+<div class="text-bar">
+    <form class="ink-form" ng-submit="send()">
+        <div class="control-group">
+            <div class="control vertical-space">
+                <input type="text" placeholder="Say something ..." ng-model="message" ng-disabled="!user.hasSetup">
+            </div>
+        </div>
+    </form>
+</div>
