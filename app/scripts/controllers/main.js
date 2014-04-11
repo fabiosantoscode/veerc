@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('veercApp').controller('MainCtrl', ['$scope', '$location', function ($scope, $location) {
+angular.module('veercApp').controller('MainCtrl', ['$rootScope', '$scope', '$location', function ($rootScope, $scope, $location) {
 
-    if (!$scope.user) {
+    if (!$rootScope.user) {
         $location.path('/login');
+    } else {
+        $location.path('/chat');
     }
 }]);
