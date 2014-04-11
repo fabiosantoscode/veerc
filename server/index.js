@@ -19,6 +19,7 @@ var sockServer = require('socket.io').listen(pureServer)
 
 sockServer.on('connection', function(sock) {
     sock.on('connect', function (obj) {
+        console.log('connect event', obj)
         onUserConnect(obj, sock)
     })
 
@@ -38,15 +39,7 @@ function onUserConnect(obj, sock) {
     console.log(obj)
     console.log('received a connect event from rogerio: connect')
 
-    var ircClient = new irc.Client(
-        'irc.freenode.net',
-        'veerc',
-        { channels: ['#mtgsapo']
-    });
-
-    ircClient.on('raw', function (message) {
-        backlog.push(message)
-    })
+    var ircClient = user.getIrcClient()
 
     ircClient.on('error', function (err) {
         sock.emit('upstream-error', err)
