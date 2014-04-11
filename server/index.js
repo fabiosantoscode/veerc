@@ -1,15 +1,17 @@
 /**
  * Main server
  */
+var websocketAsStream = require('websocket-stream')
+var Backlog = require('tailable-capped-array')
 var restify = require('restify')
+var path = require('path')
 var irc = require('irc')
-var ws = require('ws')
 
 var server = restify.createServer({})
 var pureServer = server.server
 
 server.get(/.*/, restify.serveStatic({
-    directory: '../app',
+    directory: path.join(__dirname, '../app'),
     default: 'index.html'
 }))
 
@@ -19,28 +21,43 @@ var ircClient = new irc.Client(
     { channels: ['#mtgsapo'] }
 );
 
-function getIrcClient(socket) { /* TODO */ return ircClient }
-
-var sockServer = new ws.Server({ server: pureServer })
-
-sockServer.on('connection', function(sock) {
-    var ircClient = getIrcClient(sock)
-    ircClient.on('raw', function (message) {
-        sock.send(JSON.stringify(message))
-    })
-    sock.on('message', function (msg) {
-        try {
-            msg = JSON.parse(msg)
-        } catch(e) { sock.send(JSON.stringify({ error: 'Dude, wrong JSON ' + e })) }
-        if (msg.type === 'message') {
-            ircClient.say(msg.to, msg.content)
-        } else if (msg.type === 'join') {
-            ircClient.join(msg.chan)
-        } else if (msg.type === 'part') {
-            ircClient.part(msg.chan)
-        }
-    })
+ircClient.on('raw', function (message) {
+    backlog.push(JSON.stringify(message))
 })
 
-server.listen(9000)
+ircClient.on('error', function (err) { console.error(err) })
 
+var backlog = new Backlog(10 /* backlog size */)
+var backlogStream = backlog.createReadStream()
+
+var sockServer = require('socket.io').listen(pureServer)
+
+sockServer.on('connection', function(sock) {
+    backlogStream.createReadStream().on('data', function () {
+        sock.emit('message')
+    })
+    sock.on('message', function (msg) {
+        if (msg.to && 'content' in msg) {
+            ircClient.say(msg.to, msg.content)
+        }
+    })
+    sock.on('join', function (chan) {
+        if (chan) {
+            ircClient.join(chan)
+        }
+    })
+    sock.on('part', function (chan) {
+        if (chan) {
+            ircClient.part(chan)
+        }
+    })
+
+    sock.on('error', function (err) { console.error(err) })
+})
+
+if (!module.parent) {  // Started from console
+    server.listen(9000)
+} else {  // required
+    module.exports.sockServer = sockServer
+    module.exports.server = server
+}
