@@ -33,8 +33,8 @@ var backlogStream = backlog.createReadStream()
 var sockServer = require('socket.io').listen(pureServer)
 
 sockServer.on('connection', function(sock) {
-    backlogStream.on('data', function () {
-        sock.emit('message')
+    backlogStream.on('data', function (data) {
+        sock.emit('message', data)
     })
     sock.on('connect', function (obj) {
         console.log('received a connect event from rogerio: connect')
