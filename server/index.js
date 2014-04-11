@@ -15,18 +15,6 @@ server.get(/.*/, restify.serveStatic({
     default: 'index.html'
 }))
 
-var ircClient = new irc.Client(
-    'irc.freenode.net',
-    'veerc',
-    { channels: ['#mtgsapo'] }
-);
-
-ircClient.on('raw', function (message) {
-    backlog.push(message)
-})
-
-ircClient.on('error', function (err) { console.error(err) })
-
 var backlog = new Backlog(10 /* backlog size */)
 var backlogStream = backlog.createReadStream()
 
@@ -38,6 +26,22 @@ sockServer.on('connection', function(sock) {
     })
     sock.on('connect', function (obj) {
         console.log('received a connect event from rogerio: connect')
+
+        var ircClient = new irc.Client(
+            'irc.freenode.net',
+            'veerc',
+            { channels: ['#mtgsapo']
+        });
+
+        ircClient.on('raw', function (message) {
+            backlog.push(message)
+        })
+
+        ircClient.on('error', function (err) {
+            sock.emit('upstream-error', err)
+            console.error(err)
+        })
+
         sock.on('message', function (msg) {
             if (msg.to && 'content' in msg) {
                 ircClient.say(msg.to, msg.content)
