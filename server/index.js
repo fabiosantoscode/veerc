@@ -36,20 +36,23 @@ sockServer.on('connection', function(sock) {
     backlogStream.on('data', function () {
         sock.emit('message')
     })
-    sock.on('message', function (msg) {
-        if (msg.to && 'content' in msg) {
-            ircClient.say(msg.to, msg.content)
-        }
-    })
-    sock.on('join', function (chan) {
-        if (chan) {
-            ircClient.join(chan)
-        }
-    })
-    sock.on('part', function (chan) {
-        if (chan) {
-            ircClient.part(chan)
-        }
+    sock.on('connect', function (obj) {
+        console.log('received a connect event from rogerio: connect')
+        sock.on('message', function (msg) {
+            if (msg.to && 'content' in msg) {
+                ircClient.say(msg.to, msg.content)
+            }
+        })
+        sock.on('join', function (chan) {
+            if (chan) {
+                ircClient.join(chan)
+            }
+        })
+        sock.on('part', function (chan) {
+            if (chan) {
+                ircClient.part(chan)
+            }
+        })
     })
 
     sock.on('error', function (err) { console.error(err) })
