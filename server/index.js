@@ -29,7 +29,9 @@ sockServer.on('connection', function(sock) {
         sock.send(JSON.stringify(message))
     })
     sock.on('message', function (msg) {
-        msg = JSON.parse(msg)
+        try {
+            msg = JSON.parse(msg)
+        } catch(e) { sock.send(JSON.stringify({ error: 'Dude, wrong JSON ' + e })) }
         if (msg.type === 'message') {
             ircClient.say(msg.to, msg.content)
         } else if (msg.type === 'join') {
