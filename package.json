@@ -24,9 +24,10 @@
     "gulp-util": "^2.2.14"
   },
   "dependencies": {
+    "engine.io": "^1.0.5",
     "gulp-nodemon": "^1.0.2",
-    "restify": "^2.7.0",
     "irc": "^0.3.6",
-    "engine.io": "^1.0.5"
+    "restify": "^2.7.0",
+    "ws": "^0.4.31"
   }
 }
