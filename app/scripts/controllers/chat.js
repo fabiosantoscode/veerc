@@ -22,7 +22,11 @@ angular.module('veercApp')
 
         socket.emit(
             'connect',
-            { nick: $scope.nick, channels: $scope.channels.split(',') }
+            {
+                nick: $scope.nick,
+                channels: $scope.channels.split(','),
+                email: $rootScope.user.email
+            }
         );
 
         socket.on('message', function (data) {
