@@ -59,11 +59,10 @@ function messageTests(sock) {
         console.error.restore && console.error.restore()
     })
     it('doesn\'t break on messages to the wrong channel', function (done) {
-        sock().send(JSON.stringify({ type: 'message', content: 'foo', to: 'rongChannel' }), function () {
-            sinon.spy(console, 'error').onCall(function () {
-                done()
-            })
+        sinon.stub(console, 'error', function () {
+            done()
         })
+        sock().send(JSON.stringify({ type: 'message', content: 'foo', to: 'rongChannel' }))
     })
 }
 

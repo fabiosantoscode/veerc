@@ -25,7 +25,7 @@ ircClient.on('raw', function (message) {
     backlog.push(JSON.stringify(message))
 })
 
-ircClient.on('error', console.error.bind(console))
+ircClient.on('error', function (err) { console.error(err) })
 
 var backlog = new Backlog(10 /* backlog size */)
 var backlogStream = backlog.createReadStream()
@@ -63,7 +63,7 @@ sockServer.on('connection', function(sock) {
         backlogStream.push(JSON.stringify({ error: 'Dude, you sent a bad message and shite' }))
     })
 
-    sock.on('error', console.error.bind(console))
+    sock.on('error', function (err) { console.error(err) })
 })
 
 if (!module.parent) {  // Started from console
