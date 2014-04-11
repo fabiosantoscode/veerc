@@ -20,6 +20,7 @@
     "angular": "~1.2.16",
     "angular-route": "~1.2.16",
     "socket.io-client": "~0.9.16",
-    "momentjs": "~2.5.1"
+    "momentjs": "~2.5.1",
+    "angular-socket-io": "~0.4.1"
   }
 }

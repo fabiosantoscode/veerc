@@ -32,13 +32,6 @@ angular.module('veercApp')
         socket.on('message', function (data) {
             $scope.log.push(data);
             console.log(data);
-            var newLine = document.createElement('p');
-            newLine.className = 'log-line';
-            newLine.innerHTML = moment().format() + ' &gt; ' + '<strong>' + (data.nick || 'Chanserv') + ':</strong> ' + data.args[1];
-            var chatArea = document.getElementsByClassName('chat-area')[0]
-            chatArea.appendChild(newLine);
-            chatArea.scrollTop = 9999999999;
-
         });
     }
 }]);

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('veercApp', [
-  'ngRoute'
+  'ngRoute',
+  'btford.socket-io'
 ])
 .config(function ($routeProvider) {
   $routeProvider
