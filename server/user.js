@@ -5,6 +5,7 @@ var irc = require('irc')
 function User(opt) {
     assert(opt.email, 'User MUST have an e-mail!')
     this.email = opt.email
+    this.channels = opt.channels
     this.nick = opt.nick
 }
 

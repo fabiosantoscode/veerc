@@ -51,11 +51,13 @@ function onUserConnect(obj, sock) {
             ircClient.say(msg.to, msg.content)
         }
     })
+
     sock.on('join', function (chan) {
         if (chan) {
             ircClient.join(chan)
         }
     })
+
     sock.on('part', function (chan) {
         if (chan) {
             ircClient.part(chan)
