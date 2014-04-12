@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('veercApp')
-.controller('ChatCtrl', ['$rootScope', '$scope', '$location', 'socket', function ($rootScope, $scope, $location, socket) {
+.controller('ChatCtrl', ['$rootScope', '$scope', '$location', 'socket', 'MessageParser', function ($rootScope, $scope, $location, socket, MessageParser) {
 
     $scope.user = {};
     $scope.log = [];
@@ -30,7 +30,9 @@ angular.module('veercApp')
         );
 
         socket.on('message', function (data) {
-            $scope.log.push(data);
+            if (data.command !== 'PING') {
+                $scope.log.push(data);
+            }
             console.log(data);
         });
     }
