@@ -1,25 +1,27 @@
 html, body {
   height: 100%;
   background: #f0f0f0;
-}
-
-.wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -120px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .top-menu {
   background: #1a1a1a;
 }
 
+.outer-grid {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 2em;
+}
+
 .chat-area {
-  min-height: 20em;
-  max-height: 20em;
   background-color: #fff;
   border: 1px solid #aaa;
   padding: 1em;
   overflow-y: auto;
+}
+
+.chat-area {
+  flex: 1;
 }

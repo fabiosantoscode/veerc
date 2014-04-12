@@ -18,7 +18,7 @@
 
 </div>
 <div class="vertical-space"></div>
-<div class="chat-area" scroll-glue>
+<div class="chat-area" scroll-glue ng-show="user.hasSetup">
 <pre>
  /$$    /$$
 | $$   | $$
@@ -32,7 +32,7 @@
 <p ng-repeat="line in log">{{ line.args[2] }}</p>
 </div>
 
-<div class="text-bar">
+<div class="text-bar" ng-show="user.hasSetup">
     <form class="ink-form" ng-submit="send()">
         <div class="control-group">
             <div class="control vertical-space">

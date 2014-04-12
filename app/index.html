@@ -21,20 +21,17 @@
     </head>
 
     <body ng-app="veercApp">
+        <div class="top-menu">
+            <nav class="ink-navigation ink-grid">
+                <ul class="menu horizontal black">
+                    <li class="active"><a href="#">Veerc</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </div>
 
-        <div class="wrap">
-            <div class="top-menu">
-                <nav class="ink-navigation ink-grid">
-                    <ul class="menu horizontal black">
-                        <li class="active"><a href="#">Veerc</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="#">About</a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <div class="ink-grid vertical-space" ng-view>
-            </div>
+        <div class="ink-grid outer-grid" ng-view>
         </div>
 
         <script src="bower_components/momentjs/moment.js"></script>
