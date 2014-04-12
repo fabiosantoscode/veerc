@@ -46,9 +46,10 @@ function onUserConnect(obj, sock) {
         console.error(err)
     })
 
-    sock.on('message', function (msg) {
+    sock.on('message', function (msg, cb) {
         if (msg.to && 'content' in msg) {
             ircClient.say(msg.to, msg.content)
+            cb && cb()
         }
     })
 
