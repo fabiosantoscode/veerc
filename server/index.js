@@ -49,6 +49,13 @@ function onUserConnect(obj, sock) {
     sock.on('message', function (msg, cb) {
         if (msg.to && 'content' in msg) {
             ircClient.say(msg.to, msg.content)
+            backlog.push({
+                command: 'PRIVMSG',
+                rawCommand: 'PRIVMSG',
+                commandType: 'normal',
+                args: [msg.to, msg.content],
+                nick: user.nick
+            })
             cb && cb()
         }
     })
