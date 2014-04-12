@@ -25,3 +25,7 @@ html, body {
 .chat-area {
   flex: 1;
 }
+
+.chat-area p {
+    white-space: pre;
+}
