@@ -33,6 +33,9 @@ angular.module('veercApp')
             if (data.command !== 'PING') {
                 $scope.log.push(data);
             }
+            setTimeout(function () {
+                document.querySelector('.chat-area').scrollTop = 999999;
+            }, 10)
             console.log(data);
         });
     }
