@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('veercApp')
-.controller('ChatCtrl', ['$rootScope', '$scope', '$location', 'socket', 'MessageParser', function ($rootScope, $scope, $location, socket, MessageParser) {
+.controller('ChatCtrl', ['$rootScope', '$scope', '$location', 'socket', function ($rootScope, $scope, $location, socket) {
 
     $scope.user = {};
     $scope.log = [];

@@ -24,6 +24,8 @@ html, body {
 
 .chat-area {
   flex: 1;
+  word-wrap: break-word;
+  overflow-x: hidden;
 }
 
 .chat-area p {
