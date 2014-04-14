@@ -18,16 +18,16 @@ server.get(/.*/, restify.serveStatic({
 var sockServer = require('socket.io').listen(pureServer)
 
 sockServer.on('connection', function(sock) {
-    sock.on('connect', function (obj) {
-        console.log('connect event', obj)
-        onUserConnect(obj, sock)
+    sock.on('connect', function (userData) {
+        console.log('connect event', userData)
+        onUserConnect(userData, sock)
     })
 
     sock.on('error', function (err) { console.error(err) })
 })
 
-function onUserConnect(obj, sock) {
-    var user = require('./user.js').getOrCreate(obj)
+function onUserConnect(userData, sock) {
+    var user = require('./user.js').getOrCreate(userData)
 
     var backlog = user.getBacklog()
     var backlogStream = backlog.createReadStream()
@@ -35,9 +35,6 @@ function onUserConnect(obj, sock) {
     backlogStream.on('data', function (data) {
         sock.emit('message', data)
     })
-
-    console.log(obj)
-    console.log('received a connect event from rogerio: connect')
 
     var ircClient = user.getIrcClient()
 
