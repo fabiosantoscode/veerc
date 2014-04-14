@@ -30,8 +30,11 @@ angular.module('veercApp')
         );
 
         socket.on('message', function (data) {
-            if (data.command !== 'PING') {
-                $scope.log.push(data);
+            console.log(data);
+            var message = MessageParser.parse(data);
+            console.log(message);
+            if (message) {
+                $scope.log.push(message);
             }
             document.querySelector('.chat-area').scrollTop = 999999;
         });
