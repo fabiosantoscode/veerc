@@ -1,19 +1,40 @@
 /**
  * Main server
  */
+var handlebars = require('handlebars')
 var Backlog = require('tailable-capped-array')
 var restify = require('restify')
 var path = require('path')
-var irc = require('irc')
+var fs = require('fs')
 var _ = require('underscore')
 
 var server = restify.createServer({})
 var pureServer = server.server
 
-server.get(/.*/, restify.serveStatic({
-    directory: path.join(__dirname, '../app'),
-    default: 'index.html'
-}))
+var prefix = process.env.VEERC_PREFIX ?
+    ('/' + process.env.VEERC_PREFIX)
+        .replace(/\/+/g, '/')
+        .replace(/\/$/, '') :
+    '';
+
+
+var indexPage = handlebars.compile(
+    fs.readFileSync(path.join(__dirname, '..', 'index.html'), { encoding: 'utf-8' }))
+    ({ prefix: prefix })
+
+server.get(prefix + '/', function (req, res) {
+    res.end(indexPage)
+})
+
+
+var staticHandler = restify.serveStatic({
+    directory: path.join(__dirname, '../app')
+})
+
+server.get('/.*', function (req, res, next) {
+    req._path = req.path().replace(prefix, '')
+    staticHandler.apply(staticHandler, arguments)
+})
 
 var sockServer = require('socket.io').listen(pureServer)
 
