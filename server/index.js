@@ -17,6 +17,7 @@ var prefix = process.env.VEERC_PREFIX ?
         .replace(/\/$/, '') :
     '';
 
+var port = +(process.env.VEERC_PORT || 3000)
 
 var indexPage = handlebars.compile(
     fs.readFileSync(path.join(__dirname, '..', 'index.html'), { encoding: 'utf-8' }))
