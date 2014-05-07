@@ -19,14 +19,13 @@
   "devDependencies": {
     "gulp": "^3.6.0",
     "gulp-connect": "^2.0.5",
-    "gulp-nodemon": "^1.0.2",
     "gulp-ruby-sass": "^0.4.1",
     "gulp-shell": "^0.2.4",
     "gulp-util": "^2.2.14"
   },
   "dependencies": {
     "engine.io": "^1.0.5",
-    "handlebars": "^2.0.0-alpha.2",
+    "gulp-nodemon": "^1.0.2",
     "irc": "^0.3.6",
     "restify": "^2.7.0",
     "sinon": "^1.9.1",
