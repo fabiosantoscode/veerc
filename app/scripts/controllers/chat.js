@@ -38,7 +38,9 @@ module.controller('ChatCtrl', ['$rootScope', '$scope', '$location', 'MessagePars
             if (message) {
                 $scope.log.push(message);
             }
-            document.querySelector('.chat-area').scrollTop = 999999;
+            setTimeout(function () {
+                document.querySelector('.chat-area').scrollTop = 999999;
+            }, 0);
         });
     }
 }]);
