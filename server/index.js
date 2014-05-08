@@ -1,40 +1,21 @@
 /**
  * Main server
  */
-var handlebars = require('handlebars')
 var Backlog = require('tailable-capped-array')
 var restify = require('restify')
 var path = require('path')
-var fs = require('fs')
+var irc = require('irc')
 var _ = require('underscore')
 
 var server = restify.createServer({})
 var pureServer = server.server
 
-var prefix = process.env.VEERC_PREFIX ?
-    ('/' + process.env.VEERC_PREFIX)
-        .replace(/\/+/g, '/')
-        .replace(/\/$/, '') :
-    '';
+var port = +(process.env.VEERC_PORT || 3000)
 
-
-var indexPage = handlebars.compile(
-    fs.readFileSync(path.join(__dirname, '..', 'index.html'), { encoding: 'utf-8' }))
-    ({ prefix: prefix })
-
-server.get(prefix + '/', function (req, res) {
-    res.end(indexPage)
-})
-
-
-var staticHandler = restify.serveStatic({
-    directory: path.join(__dirname, '../app')
-})
-
-server.get('/.*', function (req, res, next) {
-    req._path = req.path().replace(prefix, '')
-    staticHandler.apply(staticHandler, arguments)
-})
+server.get(/.*/, restify.serveStatic({
+    directory: path.join(__dirname, '../app'),
+    default: 'index.html'
+}))
 
 var sockServer = require('socket.io').listen(pureServer)
 
@@ -91,5 +72,6 @@ function onUserConnect(userData, sock) {
     })
 }
 
-server.listen(3000)
+server.listen(port)
+console.log('Listening on %d', port);
 
